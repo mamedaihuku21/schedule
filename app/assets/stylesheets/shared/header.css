@@ -1,0 +1,14 @@
+header.top-page-header {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  background: #b3fcff;
+  height: auto; 
+}
+
+header.top-page-header a {
+  color: #000000;
+  text-decoration: none;
+}
