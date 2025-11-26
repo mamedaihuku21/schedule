@@ -1,0 +1,42 @@
+<%= render "shared/header" %>
+
+<div class="calendar-wrapper">
+
+  <%# 左上メニューアイコン %>
+  <div class="menu-icon">☰</div>
+
+  <%# 月表示部分 %>
+  <div class="month-header">
+    <div class="month-nav">＜</div>
+    <div class="month-text">
+      <% today = Date.new(2025, 11, 26) %> 
+      <%= today.year %>年 <%= today.month %>月
+    </div>
+    <div class="month-nav">＞</div>
+  </div>
+
+  <%# カレンダー本体 %>
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% 5.times do |week| %>
+        <tr>
+          <% 7.times do |day| %>
+            <td class="day-cell">
+              <div class="day-number"><%= week * 7 + day + 1 %></div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
+
+<%# 右下の追加ボタン %>
+<div class="floating-add-button">＋</div>

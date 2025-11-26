@@ -1,0 +1,106 @@
+body {
+  background-color: #000;
+  margin: 0;
+}
+
+/* 左上メニューアイコン：画面左上に固定 */
+.menu-icon {
+  position: fixed;
+  top: 90px;
+  left: 10px;
+  font-size: 55px;
+  color: black;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* 全体 */
+.calendar-wrapper {
+  width: 95%;
+  max-width: 1000px;
+  margin: 60px auto 40px;
+  position: relative;
+}
+
+/* 月表示部分（カレンダー上の中央に固定） */
+.month-header {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 10px 100px;
+  border-radius: 10px;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* ナビゲーション矢印 */
+.month-header .month-nav {
+  font-size: 26px;
+  padding: 0 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 年月テキスト */
+.month-header .month-text {
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  white-space: nowrap;
+}
+
+/* カレンダー */
+.calendar-table {
+  width: 100%;
+  margin-top: 15px;
+  background: white;
+  color: black;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.calendar-table th {
+  background: #ececec;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.calendar-table td {
+  height: 130px;
+  border: 1px solid #ccc;
+  position: relative;
+  vertical-align: top;
+}
+
+/* 日付の数字（左上へ） */
+.day-number {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* 右下の追加ボタン */
+.floating-add-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 85px;
+  height: 85px;
+  background: #4f8cff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 50px;
+  cursor: pointer;
+  box-shadow: 0px 0px 12px rgba(255,255,255,0.5);
+}
