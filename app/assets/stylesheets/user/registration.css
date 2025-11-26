@@ -1,0 +1,61 @@
+body {
+  background: #f2f5ff;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* 全体の箱 */
+.signup-wrapper {
+  width: 90%;
+  max-width: 400px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+/* タイトル */
+.signup-title {
+  text-align: center;
+  color: #000000;
+  margin-bottom: 25px;
+}
+
+/* 各入力欄 */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* ボタン */
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f76ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: #3d62e5;
+}
+
