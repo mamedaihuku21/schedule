@@ -1,12 +1,29 @@
 <%= render "shared/header" %>
 
-<div class="content-wrapper">
+<div class="login-wrapper">
 
-  <div class="login-container">
-    <p class="login-title">ログイン</p>
-    <input type="text" placeholder="名前" />
-    <input type="password" placeholder="パスワード" />
-    <button>ログイン</button>
-    <div class="register-link">アカウントの作成</div>
+  <div class="login-form">
+
+    <h2 class="login-title">ログイン</h2>
+
+    <%= form_with url: "/users/sign_in", method: :post, local: true do |f| %>
+
+      <div class="login-group">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email %>
+      </div>
+
+      <div class="login-group">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password %>
+      </div>
+
+      <%= f.submit "ログイン", class: "login-btn" %>
+    <% end %>
+
+    <div class="login-register-link">
+      <a href="/users/sign_up">アカウント作成はこちら</a>
+    </div>
+
   </div>
 </div>

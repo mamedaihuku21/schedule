@@ -47,7 +47,7 @@ body {
 .signup-btn {
   width: 100%;
   padding: 12px;
-  background: #4f76ff;
+  background: #4aa8d8;
   color: white;
   border: none;
   border-radius: 6px;
@@ -55,7 +55,4 @@ body {
   cursor: pointer;
 }
 
-.signup-btn:hover {
-  background: #3d62e5;
-}
 
