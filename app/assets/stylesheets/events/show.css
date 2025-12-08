@@ -5,25 +5,6 @@
   padding-bottom: 40px;
 }
 
-/* 仮の円グラフ */
-.chart-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.chart-placeholder {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 4px dashed #bbb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #888;
-  font-size: 16px;
-}
-
 /* ボタン */
 .action-buttons {
   display: flex;
@@ -33,7 +14,7 @@
 }
 
 .action-btn {
-  background: #4da7ff;
+  background: #4aa8d8;
   color: white;
   padding: 10px 18px;
   border-radius: 20px;

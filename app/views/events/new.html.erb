@@ -1,0 +1,35 @@
+<div class="event-new-wrapper">
+
+<div class="event-new-container">
+
+  <!-- 左上：閉じるボタン -->
+  <div class="top-left">
+    ✕
+  </div>
+
+  <!-- 円グラフ（共通パーツ） -->
+  <%= render "shared/chart" %>
+
+  <div class="event-btn-row">
+    <!-- 予定追加ボタン -->
+    <div class="add-event-btn">
+      予定を追加
+    </div>
+    <!-- 仮予定ボタン -->
+    <div class="temp-event-btn">
+      仮予定を追加
+    </div>
+  </div>
+
+  <!-- 入力エリア（見た目だけ） -->
+  <div class="event-form-box">
+    <div class="event-row">タスク</div>
+    <div class="event-row">00〜00</div>
+    <div class="event-row">リスト</div>
+    <div class="event-row">カテゴリー</div>
+
+    <!-- メモだけ幅広 -->
+    <div class="event-memo">メモ</div>
+  </div>
+
+</div>

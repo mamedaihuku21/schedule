@@ -54,10 +54,11 @@
   font-size: 16px;
   cursor: pointer;
   transition: 0.2s;
+  font-weight: bold;
 }
 
 .login-btn:hover {
-  background-color: #3a96c5;
+  background-color: #4aa8d8;
 }
 
 .login-register-link {
