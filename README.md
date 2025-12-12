@@ -1,24 +1,38 @@
-# README
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| user_name          | string | null: false |
+| encrypted_password | string | null: false |
+| email              | string | null: false |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+has_many :events
+has_many :categories
 
-Things you may want to cover:
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| user          | references | null: false, foreign_key: true |
+| category_name | string     | null: false                    |
+| color_code    | string     | null: false                    |
 
-* Ruby version
+belongs_to :user
+has_many :events
 
-* System dependencies
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| user       | references | null: false, foreign_key: true |
+| category   | references | null: false, foreign_key: true |
+| title      | string     | null: false                    |
+| memo       | text       |                                |
+| start_time | datetime   | null: false                    |
+| end_time   | datetime   | null: false                    |
+| temporary  | boolean    | null: false                    |
 
-* Configuration
+belongs_to :user
+belongs_to :category
+has_one :notification
 
-* Database creation
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| event     | references | null: false, foreign_key: true |
+| notify_at | datetime   | null: false                    |
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+belongs_to :event
