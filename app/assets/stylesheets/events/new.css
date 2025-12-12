@@ -1,0 +1,71 @@
+.event-new-container {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 20px;
+}
+
+/* 左上 × */
+.top-left {
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.event-btn-row {
+  width: 90%;
+  margin: 10px auto 20px auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* 予定を追加 */
+.add-event-btn {
+  flex: 1;
+  padding: 12px 0;
+  text-align: center;
+  background: #4aa8d8;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+/* 仮予定ボタン */
+.temp-event-btn {
+  flex: 1;
+  padding: 12px 0;
+  text-align: center;
+  background: #eeb964;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+/* 入力グループの箱 */
+.event-form-box {
+  width: 90%;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 各行 */
+.event-row {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* メモは広い箱にする */
+.event-memo {
+  padding: 12px 10px;
+  height: 120px;
+  border-radius: 8px;
+}
