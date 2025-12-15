@@ -1,16 +1,16 @@
 <div class="event-new-container">
 
   <!-- 左上 × ボタン -->
-  <div class="top-left">×</div>
+  <div class="top-left">✕</div>
 
   <!-- 円グラフ（追加ページと同じ部分テンプレート） -->
   <%= render "shared/chart" %>
 
   <!-- 予定を編集 -->
-  <div class="add-event-btn">予定を編集</div>
-
-  <!-- 仮予定ボタン（追加ページと同じデザイン） -->
-  <div class="temp-event-btn">仮予定を編集</div>
+  <div class="event-btn-row">
+    <div class="add-event-btn">予定として保存</div>
+    <div class="temp-event-btn">仮予定として編集</div>
+  </div>
 
   <div class="event-form-box">
     <div class="event-row">タスク</div>
