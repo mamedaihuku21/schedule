@@ -1,0 +1,87 @@
+.hamburger {
+  position: fixed;
+  top: 120px;
+  left: 12px;
+  width: 32px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  margin: 5px 0;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* サイドメニュー */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  display: none;   /* ← 非表示 */
+  z-index: 1000;
+  padding-top: 150px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+}
+
+.side-menu.open {
+  display: block;  /* ← 表示 */
+}
+
+/* 中身 */
+.menu-header {
+  padding: 16px;
+  font-weight: bold;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  align-items: center;
+}
+
+/* スイッチ */
+.menu-switch {
+  width: 44px;
+  height: 22px;
+  border-radius: 22px;
+  background: #ccc;
+  position: relative;
+}
+
+.menu-switch::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+.menu-switch.on {
+  background: #4aa8d8;
+}
+
+.menu-switch.on::after {
+  left: 24px;
+}
+
+.menu-divider {
+  height: 1px;
+  background: #ddd;
+  margin: 8px 0;
+}
+
+.menu-link {
+  padding: 14px 20px;
+  cursor: pointer;
+}
