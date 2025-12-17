@@ -12,4 +12,7 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def detail
+  end
+  
 end
