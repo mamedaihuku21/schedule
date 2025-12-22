@@ -1,3 +1,4 @@
+Usersテーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | user_name          | string | null: false |
@@ -7,6 +8,7 @@
 has_many :events
 has_many :categories
 
+Categoriesテーブル
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | user          | references | null: false, foreign_key: true |
@@ -16,6 +18,7 @@ has_many :categories
 belongs_to :user
 has_many :events
 
+Eventsテーブル
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
 | user       | references | null: false, foreign_key: true |
@@ -30,6 +33,7 @@ belongs_to :user
 belongs_to :category
 has_one :notification
 
+Notificationsテーブル
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
 | event     | references | null: false, foreign_key: true |
