@@ -23,10 +23,11 @@
   width: 260px;
   height: 100%;
   background: #fff;
-  display: none;   /* ← 非表示 */
+  display: none;
   z-index: 1000;
   padding-top: 150px;
   box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+
 }
 
 .side-menu.open {
@@ -37,6 +38,7 @@
 .menu-header {
   padding: 16px;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .menu-item {

@@ -5,16 +5,39 @@
   <span></span>
 </div>
 
+<div class="overlay"></div>
+
 <!-- サイドメニュー -->
 <div class="side-menu">
-  <div class="menu-header">メニュー</div>
+
+  <!-- 上部：ユーザー名表示 -->
+  <% if user_signed_in? %>
+    <div class="menu-header">
+      <%= current_user.user_name %> さん
+    </div>
+  <% end %>
+
+  <div class="menu-divider"></div>
 
   <div class="menu-item">
     <span>memoモード</span>
     <div class="menu-switch off"></div>
   </div>
 
-  <div class="menu-divider"></div>
+    <% if user_signed_in? %>
+      <!-- ログイン中 -->
+      <div class="menu-link">
+        <%= link_to "ログアウト",destroy_user_session_path,data: { turbo_method: :delete } %>
+        </div>
 
-
+    <% else %>
+        <!-- 未ログイン -->
+        <div class="menu-link">
+          <%= link_to "ログイン", new_user_session_path %>
+        </div>
+        <div class="menu-link">
+          <%= link_to "新規登録", new_user_registration_path %>
+        </div>
+    <% end %>
+  </div>
 </div>
