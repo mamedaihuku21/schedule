@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "events#index"
 
-  resources :events, only: [:index, :show, :new, :edit, ] do
+  resources :events, only: [:index, :show, :new, :create, :edit] do
     member do
       get :detail
     end

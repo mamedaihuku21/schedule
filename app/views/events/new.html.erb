@@ -10,26 +10,56 @@
   <!-- 円グラフ（共通パーツ） -->
   <%= render "shared/chart" %>
 
-  <div class="event-btn-row">
-    <!-- 予定追加ボタン -->
-    <div class="add-event-btn">
-      予定を追加
+  <!-- エラーメッセージ -->
+  <% if @event.errors.any? %>
+    <div class="event-errors">
+      <% @event.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
     </div>
-    <!-- 仮予定ボタン -->
-    <div class="temp-event-btn">
-      仮予定を追加
+  <% end %>
+
+  <%= form_with model: @event do |f| %>
+    <div class="event-btn-row">
+      <!-- 予定追加ボタン：送信 -->
+      <%= f.submit "予定を追加", class: "add-event-btn" %>
+      <!-- 仮予定ボタン（後で実装） -->
+      <div class="temp-event-btn">
+        仮予定を追加
+      </div>
     </div>
-  </div>
 
-  <!-- 入力エリア（見た目だけ） -->
-  <div class="event-form-box">
-    <div class="event-row">タスク：</div>
-    <div class="event-row">時間：</div>
-    <div class="event-row">リスト：</div>
-    <div class="event-row">カテゴリー：</div>
+    <div class="event-form-box">
+      <div class="event-row">
+        <span>タスク：</span>
+        <%= f.text_field :title %>
+      </div>
 
-    <!-- メモだけ幅広 -->
-    <div class="event-memo">メモ：</div>
-  </div>
+      <div class="event-row">
+        <span>開始時間：</span>
+        <%= f.datetime_local_field :start_time %>
+      </div>
+
+      <div class="event-row">
+        <span>終了時間：</span>
+        <%= f.datetime_local_field :end_time %>
+      </div>
+
+      <div class="event-row">
+        <span>カテゴリー：</span>
+        <%= f.select :category_id, @categories.map { |c| [c.category_name, c.id] }, { include_blank: "選択してください" } %>
+        <details class="category-create">
+          <summary>＋ 作成</summary>
+          <input type="text"  name="new_category_name"  placeholder="カテゴリー名">
+          <input type="color" name="new_category_color" value="#4aa8d8">
+        </details>
+      </div>
+
+      <div class="event-memo">
+        <span>メモ：</span>
+        <%= f.text_area :memo %>
+      </div>
+    </div>
+  <% end %>
 
 </div>
