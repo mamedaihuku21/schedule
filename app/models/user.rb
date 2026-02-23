@@ -7,4 +7,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   validates :user_name, presence: true
+
+  has_many :categories
+  has_many :events
 end
