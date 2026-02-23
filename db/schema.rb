@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_24_061656) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_23_000003) do
+  create_table "categories", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "category_name", null: false
+    t.string "color_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "events", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.string "title", null: false
+    t.text "memo"
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.boolean "temporary", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_events_on_category_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "notifications", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.datetime "notify_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_notifications_on_event_id"
+  end
+
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -24,4 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_24_061656) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "users"
+  add_foreign_key "events", "categories"
+  add_foreign_key "events", "users"
+  add_foreign_key "notifications", "events"
 end
