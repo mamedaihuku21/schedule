@@ -1,0 +1,39 @@
+<div class="event-show-container">
+
+  <!-- カレンダーに戻るボタン -->
+  <%= link_to "＜", events_path(year: @date.year, month: @date.month), class: "back-link" %>
+
+  <!-- 円グラフ（仮） -->
+  <%= render "shared/chart" %>
+
+  <!-- 予定追加ボタン -->
+  <div class="action-buttons">
+    <%= link_to "予定を追加", new_event_path, class: "btn action-btn" %>
+  </div>
+
+  <!-- 予定一覧 -->
+  <div class="info-box">
+    <h2><%= @date.strftime("%Y年%m月%d日") %> の予定</h2>
+    <% if @events.any? %>
+      <% @events.each do |event| %>
+        <p>● <%= event.start_time.strftime("%H:%M") %> - <%= event.end_time.strftime("%H:%M") %> <%= event.title %></p>
+      <% end %>
+    <% else %>
+      <p>予定はありません</p>
+    <% end %>
+  </div>
+
+  <!-- メモ -->
+  <div class="info-box">
+    <h2>メモ</h2>
+    <% memo_events = @events.select { |e| e.memo.present? } %>
+    <% if memo_events.any? %>
+      <% memo_events.each do |event| %>
+        <p><strong><%= event.title %>：</strong><%= event.memo %></p>
+      <% end %>
+    <% else %>
+      <p>メモはありません</p>
+    <% end %>
+  </div>
+
+</div>

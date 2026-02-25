@@ -5,12 +5,15 @@
 
   <%# 月表示部分 %>
   <div class="month-header">
-    <div class="month-nav">＜</div>
-    <div class="month-text">
-      <% today = Date.new(2025, 11, 26) %> 
-      <%= today.year %>年 <%= today.month %>月
+    <div class="month-nav">
+      <%= link_to "＜", events_path(year: @first_day.prev_month.year, month: @first_day.prev_month.month) %>
     </div>
-    <div class="month-nav">＞</div>
+    <div class="month-text">
+      <%= @first_day.year %>年 <%= @first_day.month %>月
+    </div>
+    <div class="month-nav">
+      <%= link_to "＞", events_path(year: @first_day.next_month.year, month: @first_day.next_month.month) %>
+    </div>
   </div>
 
   <%# カレンダー本体 %>
@@ -22,11 +25,24 @@
     </thead>
 
     <tbody>
-      <% 5.times do |week| %>
+      <%
+        cal_start = @first_day - @first_day.wday
+        last_day  = @first_day.end_of_month
+        cal_end   = last_day + (6 - last_day.wday)
+        weeks     = (cal_start..cal_end).each_slice(7).to_a
+      %>
+      <% weeks.each do |week| %>
         <tr>
-          <% 7.times do |day| %>
-            <td class="day-cell">
-              <div class="day-number"><%= week * 7 + day + 1 %></div>
+          <% week.each do |date| %>
+            <td class="day-cell <%= 'other-month' if date.month != @month %>">
+              <%= link_to day_events_path(date: date), class: "day-link" do %>
+                <div class="day-number"><%= date.day %></div>
+              <% end %>
+              <% (@events_by_date[date] || []).first(2).each do |event| %>
+                <div class="event-chip" style="background-color: <%= event.category.color_code %>">
+                  <%= event.title.truncate(10) %>
+                </div>
+              <% end %>
             </td>
           <% end %>
         </tr>
