@@ -35,10 +35,27 @@
 
 /* ナビゲーション矢印 */
 .month-header .month-nav {
-  font-size: 26px;
-  padding: 0 50px;
-  cursor: pointer;
-  user-select: none;
+  padding: 0 30px;
+}
+
+.month-header .month-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f0f4ff;
+  color: #4f8cff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.month-header .month-nav a:hover {
+  background: #4f8cff;
+  color: white;
 }
 
 /* 年月テキスト */
@@ -52,6 +69,7 @@
 /* カレンダー */
 .calendar-table {
   width: 100%;
+  table-layout: fixed;
   margin-top: 15px;
   background: white;
   color: black;
@@ -71,6 +89,16 @@
   border: 1px solid #ccc;
   position: relative;
   vertical-align: top;
+  overflow: hidden;
+}
+
+/* 当月以外の日付セル */
+.other-month {
+  background: #f9f9f9;
+}
+
+.other-month .day-number {
+  color: #bbb;
 }
 
 /* 日付の数字（左上へ） */
@@ -80,6 +108,25 @@
   left: 6px;
   font-size: 14px;
   color: #444;
+}
+
+/* 日付リンク（数字部分） */
+.day-link {
+  display: block;
+  text-decoration: none;
+  height: 28px;
+}
+
+/* 予定チップ */
+.event-chip {
+  margin: 2px 4px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 右下の追加ボタン */
