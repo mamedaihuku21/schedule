@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :detail]
 
   def index
     @year  = (params[:year]  || Date.today.year).to_i
@@ -59,6 +59,7 @@ class EventsController < ApplicationController
   end
 
   def detail
+    @event = current_user.events.includes(:category).find(params[:id])
   end
 
   private

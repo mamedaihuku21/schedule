@@ -1,7 +1,7 @@
 <div class="event-new-container">
 
-  <!-- 左上 × ボタン -->
-  <div class="top-left">＜</div>
+  <!-- 左上戻るボタン -->
+  <%= link_to "＜", day_events_path(date: @event.start_time.to_date), class: "top-left" %>
 
   <!-- 円グラフ（編集ページと同じ） -->
   <%= render "shared/chart" %>
@@ -14,15 +14,30 @@
 
   <!-- 詳細表示ボックス -->
   <div class="event-form-box">
-    <div class="event-row">タスク：</div>
-    <div class="event-row">時間：</div>
-    <div class="event-row">リスト：</div>
-    <div class="event-row">カテゴリー：</div>
+    <div class="event-row">
+      <span class="detail-label">タスク</span>
+      <span class="detail-value"><%= @event.title %></span>
+    </div>
+    <div class="event-row">
+      <span class="detail-label">時間</span>
+      <span class="detail-value"><%= @event.start_time.strftime("%H:%M") %> 〜 <%= @event.end_time.strftime("%H:%M") %></span>
+    </div>
+    <div class="event-row">
+      <span class="detail-label">カテゴリー</span>
+      <span class="detail-value">
+        <span class="category-badge" style="background-color:<%= @event.category.color_code %>">
+          <%= @event.category.category_name %>
+        </span>
+      </span>
+    </div>
 
     <!-- メモ -->
-    <div class="event-memo">
-      メモ：<br>
-    </div>
+    <% if @event.memo.present? %>
+      <div class="event-memo">
+        <span class="detail-label">メモ</span>
+        <div class="detail-memo-text"><%= @event.memo %></div>
+      </div>
+    <% end %>
   </div>
 
 </div>
