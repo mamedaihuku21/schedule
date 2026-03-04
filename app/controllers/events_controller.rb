@@ -58,6 +58,13 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def destroy
+    @event = current_user.events.find(params[:id])
+    date = @event.start_time.to_date
+    @event.destroy
+    redirect_to day_events_path(date: date), notice: "予定を削除しました"
+  end
+
   def detail
     @event = current_user.events.includes(:category).find(params[:id])
   end

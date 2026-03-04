@@ -4,7 +4,7 @@
 
     <h2 class="login-title">ログイン</h2>
 
-    <%= form_with url: "/users/sign_in", method: :post, local: true do |f| %>
+    <%= form_with url: "/users/sign_in", method: :post, scope: :user, local: true do |f| %>
 
       <div class="login-group">
         <%= f.label :email, "メールアドレス" %>
