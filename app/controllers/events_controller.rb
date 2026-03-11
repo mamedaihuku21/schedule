@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :detail]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :detail]
 
   def index
     @year  = (params[:year]  || Date.today.year).to_i
@@ -56,6 +56,27 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event = current_user.events.find(params[:id])
+    @categories = current_user.categories
+  end
+
+  def update
+    @event = current_user.events.find(params[:id])
+    if params[:new_category_name].present?
+      category = current_user.categories.create!(
+        category_name: params[:new_category_name],
+        color_code:    params[:new_category_color].presence || "#4aa8d8"
+      )
+      result = @event.update(event_params.merge(category_id: category.id))
+    else
+      result = @event.update(event_params)
+    end
+    if result
+      redirect_to detail_event_path(@event), notice: "予定を更新しました"
+    else
+      @categories = current_user.categories
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
