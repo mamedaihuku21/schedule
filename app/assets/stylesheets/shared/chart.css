@@ -3,16 +3,3 @@
   justify-content: center;
   margin-bottom: 30px;
 }
-
-/* 円グラフに見せるダミー丸 */
-.dummy-chart {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 4px dashed #bbb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #888;
-  font-size: 16px;
-}

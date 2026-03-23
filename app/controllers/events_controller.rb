@@ -26,14 +26,20 @@ class EventsController < ApplicationController
                             .includes(:category)
                             .where(start_time: @date.beginning_of_day..@date.end_of_day)
                             .order(:start_time)
+      @chart_events = @events
     else
       @events = []
+      @chart_events = []
     end
   end
 
   def new
     @event = Event.new
     @categories = current_user.categories
+    chart_date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @chart_events = current_user.events
+                                .includes(:category)
+                                .where(start_time: chart_date.beginning_of_day..chart_date.end_of_day)
   end
 
   def create
@@ -58,6 +64,10 @@ class EventsController < ApplicationController
   def edit
     @event = current_user.events.find(params[:id])
     @categories = current_user.categories
+    chart_date = @event.start_time.to_date
+    @chart_events = current_user.events
+                                .includes(:category)
+                                .where(start_time: chart_date.beginning_of_day..chart_date.end_of_day)
   end
 
   def update
@@ -88,6 +98,10 @@ class EventsController < ApplicationController
 
   def detail
     @event = current_user.events.includes(:category).find(params[:id])
+    chart_date = @event.start_time.to_date
+    @chart_events = current_user.events
+                                .includes(:category)
+                                .where(start_time: chart_date.beginning_of_day..chart_date.end_of_day)
   end
 
   private

@@ -7,8 +7,8 @@
     <%= link_to "＜", detail_event_path(@event) %>
   </div>
 
-  <!-- 円グラフ（共通パーツ） -->
-  <%= render "shared/chart" %>
+  <!-- 円グラフ -->
+  <%= render "shared/chart", chart_events: @chart_events %>
 
   <!-- エラーメッセージ -->
   <% if @event.errors.any? %>
