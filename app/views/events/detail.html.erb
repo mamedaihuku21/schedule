@@ -3,8 +3,8 @@
   <!-- 左上戻るボタン -->
   <%= link_to "＜", day_events_path(date: @event.start_time.to_date), class: "top-left" %>
 
-  <!-- 円グラフ（編集ページと同じ） -->
-  <%= render "shared/chart" %>
+  <!-- 円グラフ -->
+  <%= render "shared/chart", chart_events: @chart_events %>
 
   <!-- 操作ボタン -->
   <div class="event-btn-row">
