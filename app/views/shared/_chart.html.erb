@@ -18,7 +18,8 @@
         segments << { tooltip: nil, duration: gap, color: "#e0e0e0", free: true } if gap > 0
       end
 
-      dur = (ev_end - ev_start) / 60.0
+      seg_start = [ev_start, current].max
+      dur = (ev_end - seg_start) / 60.0
       if dur > 0
         tooltip_str = "#{ev_start.strftime('%H:%M')}〜#{ev_end.strftime('%H:%M')} #{event.title}"
         segments << { tooltip: tooltip_str, duration: dur, color: event.category.color_code, free: false }
@@ -97,53 +98,86 @@
       c.fill();
     }
 
-    // セグメント描画
-    var cum = 0;
-    durations.forEach(function(dur, i) {
-      drawArc(ta(cum), ta(cum + dur), colors[i]);
-      cum += dur;
-    });
+    function drawBase() {
+      c.clearRect(0, 0, canvas.width, canvas.height);
 
-    // かぶり区間を赤でオーバーレイ
-    overlaps.forEach(function(ov) {
-      drawArc(ta(ov[0]), ta(ov[1]), "rgba(220, 50, 50, 0.5)");
-    });
+      // セグメント描画
+      var cum = 0;
+      durations.forEach(function(dur, i) {
+        drawArc(ta(cum), ta(cum + dur), colors[i]);
+        cum += dur;
+      });
 
-    // セグメント間の白い区切り線
-    cum = 0;
-    durations.forEach(function(dur, i) {
-      if (i > 0) {
-        var angle = ta(cum);
+      // かぶり区間を赤でオーバーレイ
+      overlaps.forEach(function(ov) {
+        drawArc(ta(ov[0]), ta(ov[1]), "rgba(220, 50, 50, 0.5)");
+      });
+
+      // セグメント間の白い区切り線
+      cum = 0;
+      durations.forEach(function(dur, i) {
+        if (i > 0) {
+          var angle = ta(cum);
+          c.beginPath();
+          c.moveTo(cx + innerR * Math.cos(angle), cy + innerR * Math.sin(angle));
+          c.lineTo(cx + outerR * Math.cos(angle), cy + outerR * Math.sin(angle));
+          c.strokeStyle = "#fff";
+          c.lineWidth   = 2;
+          c.stroke();
+        }
+        cum += dur;
+      });
+
+      // 0・6・12・18 の時刻マーカー
+      [0, 6, 12, 18].forEach(function(hour) {
+        var angle  = ta(hour * 60);
+        var tick1  = outerR + 4;
+        var tick2  = outerR + 11;
+        var labelR = outerR + 22;
+
+        c.beginPath();
+        c.moveTo(cx + tick1 * Math.cos(angle), cy + tick1 * Math.sin(angle));
+        c.lineTo(cx + tick2 * Math.cos(angle), cy + tick2 * Math.sin(angle));
+        c.strokeStyle = "#999";
+        c.lineWidth   = 1.5;
+        c.stroke();
+
+        c.font         = "bold 11px sans-serif";
+        c.fillStyle    = "#555";
+        c.textAlign    = "center";
+        c.textBaseline = "middle";
+        c.fillText(hour.toString(), cx + labelR * Math.cos(angle), cy + labelR * Math.sin(angle));
+      });
+    }
+
+    // 初回描画
+    drawBase();
+
+    // フォーム入力のプレビューを反映する関数（外部から呼び出し可能）
+    canvas.drawPreview = function(startMin, endMin, hexColor) {
+      drawBase();
+      if (startMin === null || endMin === null || startMin >= endMin) return;
+      startMin = Math.max(0, startMin);
+      endMin   = Math.min(1440, endMin);
+      if (startMin >= endMin) return;
+
+      // 16進カラーをrgbaに変換して半透明でオーバーレイ
+      var r = parseInt(hexColor.slice(1, 3), 16);
+      var g = parseInt(hexColor.slice(3, 5), 16);
+      var b = parseInt(hexColor.slice(5, 7), 16);
+      drawArc(ta(startMin), ta(endMin), "rgba(" + r + "," + g + "," + b + ",0.55)");
+
+      // プレビューの境界線
+      [startMin, endMin].forEach(function(min) {
+        var angle = ta(min);
         c.beginPath();
         c.moveTo(cx + innerR * Math.cos(angle), cy + innerR * Math.sin(angle));
         c.lineTo(cx + outerR * Math.cos(angle), cy + outerR * Math.sin(angle));
         c.strokeStyle = "#fff";
         c.lineWidth   = 2;
         c.stroke();
-      }
-      cum += dur;
-    });
-
-    // 0・6・12・18 の時刻マーカー
-    [0, 6, 12, 18].forEach(function(hour) {
-      var angle  = ta(hour * 60);
-      var tick1  = outerR + 4;
-      var tick2  = outerR + 11;
-      var labelR = outerR + 22;
-
-      c.beginPath();
-      c.moveTo(cx + tick1 * Math.cos(angle), cy + tick1 * Math.sin(angle));
-      c.lineTo(cx + tick2 * Math.cos(angle), cy + tick2 * Math.sin(angle));
-      c.strokeStyle = "#999";
-      c.lineWidth   = 1.5;
-      c.stroke();
-
-      c.font         = "bold 11px sans-serif";
-      c.fillStyle    = "#555";
-      c.textAlign    = "center";
-      c.textBaseline = "middle";
-      c.fillText(hour.toString(), cx + labelR * Math.cos(angle), cy + labelR * Math.sin(angle));
-    });
+      });
+    };
 
     // ホバーツールチップ
     var tip = document.createElement("div");

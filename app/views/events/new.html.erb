@@ -63,3 +63,51 @@
   <% end %>
 
 </div>
+
+<script>
+  (function() {
+    var categoryColors = <%= raw @categories.map { |c| [c.id.to_s, c.color_code] }.to_h.to_json %>;
+
+    function getCanvas() {
+      return document.querySelector(".chart-wrapper canvas");
+    }
+
+    function toMinutes(datetimeLocalValue) {
+      if (!datetimeLocalValue) return null;
+      var t = datetimeLocalValue.split("T")[1];
+      if (!t) return null;
+      var parts = t.split(":");
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    }
+
+    function updatePreview() {
+      var canvas = getCanvas();
+      if (!canvas || !canvas.drawPreview) return;
+
+      var startInput     = document.getElementById("event_start_time");
+      var endInput       = document.getElementById("event_end_time");
+      var categorySelect = document.getElementById("event_category_id");
+      var newColorInput  = document.querySelector("input[name='new_category_color']");
+
+      var startMin = toMinutes(startInput && startInput.value);
+      var endMin   = toMinutes(endInput   && endInput.value);
+
+      var color = "#4aa8d8";
+      if (categorySelect && categorySelect.value && categoryColors[categorySelect.value]) {
+        color = categoryColors[categorySelect.value];
+      } else if (newColorInput && newColorInput.value) {
+        color = newColorInput.value;
+      }
+
+      canvas.drawPreview(startMin, endMin, color);
+    }
+
+    ["event_start_time", "event_end_time", "event_category_id"].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener("change", updatePreview);
+    });
+
+    var newColorInput = document.querySelector("input[name='new_category_color']");
+    if (newColorInput) newColorInput.addEventListener("input", updatePreview);
+  })();
+</script>
