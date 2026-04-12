@@ -41,41 +41,6 @@
   font-size: 16px;
 }
 
-.menu-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 20px;
-  align-items: center;
-}
-
-/* スイッチ */
-.menu-switch {
-  width: 44px;
-  height: 22px;
-  border-radius: 22px;
-  background: #ccc;
-  position: relative;
-}
-
-.menu-switch::after {
-  content: "";
-  width: 18px;
-  height: 18px;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: 0.3s;
-}
-
-.menu-switch.on {
-  background: #4aa8d8;
-}
-
-.menu-switch.on::after {
-  left: 24px;
-}
 
 .menu-divider {
   height: 1px;
