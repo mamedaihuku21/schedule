@@ -1,0 +1,14 @@
+alice_work:
+  user: alice
+  category_name: 仕事
+  color_code: "#4aa8d8"
+
+alice_personal:
+  user: alice
+  category_name: プライベート
+  color_code: "#6dbb6d"
+
+bob_work:
+  user: bob
+  category_name: 仕事
+  color_code: "#4aa8d8"

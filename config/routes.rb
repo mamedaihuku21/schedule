@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root "events#index"
+  authenticated :user do
+    root "events#index", as: :authenticated_root
+  end
+  root "users/sessions#new"
 
   resources :categories, only: [:destroy]
-  resources :notifications, only: [:index]
 
   resources :events, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do
