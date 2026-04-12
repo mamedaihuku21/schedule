@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root "events#index", as: :authenticated_root
   end
-  root "devise/sessions#new"
+  root to: redirect("/users/sign_in")
 
   resources :categories, only: [:destroy]
 
