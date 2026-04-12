@@ -68,21 +68,6 @@
         </div>
       </div>
 
-      <div class="event-row notif-row">
-        <span>通知：</span>
-        <label class="notif-label">
-          <input type="checkbox" id="notif_enabled" name="notif_enabled" value="1">
-          <span class="notif-switch-ui"></span>
-        </label>
-        <select name="notif_minutes_before" id="notif_minutes_before" class="notif-select" style="display:none">
-          <option value="0">開始時刻</option>
-          <option value="5" selected>5分前</option>
-          <option value="10">10分前</option>
-          <option value="15">15分前</option>
-          <option value="30">30分前</option>
-        </select>
-      </div>
-
       <div class="event-memo">
         <span>メモ：</span>
         <%= f.text_area :memo %>
@@ -144,16 +129,5 @@
     var newColorInput = document.querySelector("input[name='new_category_color']");
     if (newColorInput) newColorInput.addEventListener("input", updatePreview);
 
-    // 通知トグル
-    var notifToggle = document.getElementById("notif_enabled");
-    var notifSelect = document.getElementById("notif_minutes_before");
-    if (notifToggle) {
-      notifToggle.addEventListener("change", function() {
-        notifSelect.style.display = this.checked ? "" : "none";
-        if (this.checked && "Notification" in window && Notification.permission === "default") {
-          Notification.requestPermission();
-        }
-      });
-    }
   })();
 </script>

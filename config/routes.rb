@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   root "users/sessions#new"
 
   resources :categories, only: [:destroy]
-  resources :notifications, only: [:index]
 
   resources :events, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do

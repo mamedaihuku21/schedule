@@ -16,28 +16,5 @@
     
     <%= yield %>
 
-    <% if user_signed_in? %>
-    <script>
-      (function() {
-        if (!("Notification" in window) || Notification.permission !== "granted") return;
-        var scheduled = new Set(JSON.parse(sessionStorage.getItem("sched_notifs") || "[]"));
-        fetch("/notifications.json")
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            list.forEach(function(n) {
-              if (scheduled.has(n.id)) return;
-              var delay = n.notify_at - Date.now();
-              if (delay < 0) return;
-              setTimeout(function() {
-                new Notification("予定の時間です", { body: n.title });
-              }, delay);
-              scheduled.add(n.id);
-            });
-            sessionStorage.setItem("sched_notifs", JSON.stringify([...scheduled]));
-          })
-          .catch(function() {});
-      })();
-    </script>
-    <% end %>
   </body>
 </html>

@@ -53,8 +53,7 @@ class EventsController < ApplicationController
     else
       @event = current_user.events.build(event_params)
     end
-if @event.save
-      handle_notification(@event)
+    if @event.save
       redirect_to events_path, notice: "予定を追加しました"
     else
       @categories = current_user.categories
@@ -69,7 +68,6 @@ if @event.save
     @chart_events = current_user.events
                                 .includes(:category)
                                 .where(start_time: chart_date.beginning_of_day..chart_date.end_of_day)
-    @notif_minutes = @event.notification ? ((@event.start_time - @event.notification.notify_at) / 60).to_i : 5
   end
 
   def update
@@ -84,7 +82,6 @@ if @event.save
       result = @event.update(event_params)
     end
     if result
-      handle_notification(@event)
       redirect_to detail_event_path(@event), notice: "予定を更新しました"
     else
       @categories = current_user.categories
@@ -111,19 +108,5 @@ if @event.save
 
   def event_params
     params.require(:event).permit(:title, :memo, :start_time, :end_time, :category_id)
-  end
-
-  def handle_notification(event)
-    if params[:notif_enabled] == "1" && event.start_time
-      minutes_before = params[:notif_minutes_before].to_i
-      notify_at = event.start_time - minutes_before.minutes
-      if event.notification
-        event.notification.update(notify_at: notify_at)
-      else
-        event.create_notification(notify_at: notify_at)
-      end
-    else
-      event.notification&.destroy
-    end
   end
 end
