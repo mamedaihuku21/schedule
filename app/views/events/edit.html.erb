@@ -39,14 +39,45 @@
         <%= f.datetime_local_field :end_time %>
       </div>
 
-      <div class="event-row">
-        <span>カテゴリー：</span>
-        <%= f.select :category_id, @categories.map { |c| [c.category_name, c.id] }, { include_blank: "選択してください" } %>
-        <details class="category-create">
-          <summary>＋ 作成</summary>
-          <input type="text"  name="new_category_name"  placeholder="カテゴリー名">
-          <input type="color" name="new_category_color" value="#4aa8d8">
-        </details>
+      <div class="event-row category-row">
+        <div class="category-top">
+          <span>カテゴリー：</span>
+          <%= f.select :category_id, @categories.map { |c| [c.category_name, c.id] }, { include_blank: "選択してください" } %>
+        </div>
+        <div class="category-actions">
+          <details class="category-create">
+            <summary>＋ 作成</summary>
+            <div class="category-create-inputs">
+              <input type="text"  name="new_category_name"  placeholder="カテゴリー名">
+              <input type="color" name="new_category_color" value="#4aa8d8">
+            </div>
+          </details>
+          <details class="category-manage">
+            <summary>削除</summary>
+            <% @categories.each do |c| %>
+              <div class="cat-manage-row">
+                <span class="cat-color-dot" style="background:<%= c.color_code %>"></span>
+                <span class="cat-manage-name"><%= c.category_name %></span>
+                <%= link_to "削除", category_path(c), data: { turbo_method: :delete, turbo_confirm: "「#{c.category_name}」を削除しますか？" }, class: "cat-delete-btn" %>
+              </div>
+            <% end %>
+          </details>
+        </div>
+      </div>
+
+      <div class="event-row notif-row">
+        <span>通知：</span>
+        <label class="notif-label">
+          <input type="checkbox" id="notif_enabled" name="notif_enabled" value="1" <%= 'checked' if @event.notification %>>
+          <span class="notif-switch-ui"></span>
+        </label>
+        <select name="notif_minutes_before" id="notif_minutes_before" class="notif-select"<%= ' style="display:none"' unless @event.notification %>>
+          <option value="0" <%= 'selected' if @notif_minutes == 0 %>>開始時刻</option>
+          <option value="5" <%= 'selected' if @notif_minutes == 5 || @event.notification.nil? %>>5分前</option>
+          <option value="10" <%= 'selected' if @notif_minutes == 10 %>>10分前</option>
+          <option value="15" <%= 'selected' if @notif_minutes == 15 %>>15分前</option>
+          <option value="30" <%= 'selected' if @notif_minutes == 30 %>>30分前</option>
+        </select>
       </div>
 
       <div class="event-memo">
@@ -103,5 +134,17 @@
 
     var newColorInput = document.querySelector("input[name='new_category_color']");
     if (newColorInput) newColorInput.addEventListener("input", updatePreview);
+
+    // 通知トグル
+    var notifToggle = document.getElementById("notif_enabled");
+    var notifSelect = document.getElementById("notif_minutes_before");
+    if (notifToggle) {
+      notifToggle.addEventListener("change", function() {
+        notifSelect.style.display = this.checked ? "" : "none";
+        if (this.checked && "Notification" in window && Notification.permission === "default") {
+          Notification.requestPermission();
+        }
+      });
+    }
   })();
 </script>

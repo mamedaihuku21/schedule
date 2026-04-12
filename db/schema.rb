@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_23_000003) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_13_000001) do
   create_table "categories", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "category_name", null: false
@@ -27,7 +27,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_23_000003) do
     t.text "memo"
     t.datetime "start_time", null: false
     t.datetime "end_time", null: false
-    t.boolean "temporary", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_events_on_category_id"
