@@ -1,0 +1,3 @@
+meeting_notif:
+  event: meeting
+  notify_at: <%= 1.hour.from_now %>
