@@ -1,7 +1,18 @@
-.event-new-container {
-  width: 100%;
+.event-date-header {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+  margin: 10px 0 4px;
+}
+
+.event-new-wrapper {
   max-width: 430px;
   margin: 0 auto;
+}
+
+.event-new-container {
+  width: 100%;
   position: relative;
   padding-top: 20px;
 }
@@ -13,6 +24,12 @@
   top: 10px;
   font-size: 24px;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.top-left:hover {
+  text-decoration: none;
 }
 
 .event-btn-row {
@@ -89,6 +106,23 @@
   width: 40px;
   padding: 0;
   cursor: pointer;
+}
+
+/* 詳細ページの値テキスト */
+.detail-value {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #333;
+}
+
+.detail-memo-text {
+  width: 100%;
+  color: #333;
+  white-space: pre-wrap;
+  min-height: 80px;
 }
 
 /* 作成トグル */

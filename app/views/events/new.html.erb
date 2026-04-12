@@ -2,12 +2,13 @@
 
 <div class="event-new-container">
 
-  <!-- 左上：閉じるボタン -->
-  <div class="top-left">
-    ＜
-  </div>
+  <!-- 左上：戻るボタン -->
+  <%= link_to "＜", @chart_date ? day_events_path(date: @chart_date) : events_path, class: "top-left" %>
 
-  <!-- 円グラフ -->
+  <!-- 日付・円グラフ（日付指定ありの場合のみ表示） -->
+  <% if @date_specified %>
+    <div class="event-date-header"><%= @chart_date.strftime("%Y年%m月%d日") %></div>
+  <% end %>
   <%= render "shared/chart", chart_events: @chart_events %>
 
   <!-- エラーメッセージ -->
@@ -23,10 +24,6 @@
     <div class="event-btn-row">
       <!-- 予定追加ボタン：送信 -->
       <%= f.submit "予定を追加", class: "add-event-btn" %>
-      <!-- 仮予定ボタン（後で実装） -->
-      <div class="temp-event-btn">
-        仮予定を追加
-      </div>
     </div>
 
     <div class="event-form-box">
@@ -102,10 +99,16 @@
       canvas.drawPreview(startMin, endMin, color);
     }
 
-    ["event_start_time", "event_end_time", "event_category_id"].forEach(function(id) {
+    ["event_start_time", "event_end_time"].forEach(function(id) {
       var el = document.getElementById(id);
-      if (el) el.addEventListener("change", updatePreview);
+      if (el) {
+        el.addEventListener("change", updatePreview);
+        el.addEventListener("input",  updatePreview);
+      }
     });
+
+    var categorySelect = document.getElementById("event_category_id");
+    if (categorySelect) categorySelect.addEventListener("change", updatePreview);
 
     var newColorInput = document.querySelector("input[name='new_category_color']");
     if (newColorInput) newColorInput.addEventListener("input", updatePreview);
