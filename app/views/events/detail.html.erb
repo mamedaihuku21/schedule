@@ -23,12 +23,12 @@
 
     <div class="event-row">
       <span>開始時間：</span>
-      <span class="detail-value"><%= @event.start_time.strftime("%Y-%m-%dT%H:%M") %></span>
+      <span class="detail-value"><%= @event.start_time.strftime("%H:%M") %></span>
     </div>
 
     <div class="event-row">
       <span>終了時間：</span>
-      <span class="detail-value"><%= @event.end_time.strftime("%Y-%m-%dT%H:%M") %></span>
+      <span class="detail-value"><%= @event.end_time.strftime("%H:%M") %></span>
     </div>
 
     <div class="event-row">
