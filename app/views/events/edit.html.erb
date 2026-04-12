@@ -3,11 +3,10 @@
 <div class="event-new-container">
 
   <!-- 左上：戻るボタン -->
-  <div class="top-left">
-    <%= link_to "＜", detail_event_path(@event) %>
-  </div>
+  <%= link_to "＜", events_path, class: "top-left" %>
 
-  <!-- 円グラフ -->
+  <!-- 日付・円グラフ -->
+  <div class="event-date-header"><%= @event.start_time.strftime("%Y年%m月%d日") %></div>
   <%= render "shared/chart", chart_events: @chart_events %>
 
   <!-- エラーメッセージ -->

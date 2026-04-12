@@ -2,13 +2,14 @@
 
 <div class="event-new-container">
 
-  <!-- 左上：閉じるボタン -->
-  <div class="top-left">
-    ＜
-  </div>
+  <!-- 左上：戻るボタン -->
+  <%= link_to "＜", @chart_date ? day_events_path(date: @chart_date) : events_path, class: "top-left" %>
 
-  <!-- 円グラフ -->
-  <%= render "shared/chart", chart_events: @chart_events %>
+  <!-- 日付・円グラフ（日付指定ありの場合のみ表示） -->
+  <% if @chart_date %>
+    <div class="event-date-header"><%= @chart_date.strftime("%Y年%m月%d日") %></div>
+    <%= render "shared/chart", chart_events: @chart_events %>
+  <% end %>
 
   <!-- エラーメッセージ -->
   <% if @event.errors.any? %>

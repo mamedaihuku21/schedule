@@ -1,43 +1,49 @@
+<div class="event-new-wrapper">
 <div class="event-new-container">
 
   <!-- 左上戻るボタン -->
   <%= link_to "＜", day_events_path(date: @event.start_time.to_date), class: "top-left" %>
 
-  <!-- 円グラフ -->
+  <!-- 日付・円グラフ -->
+  <div class="event-date-header"><%= @event.start_time.strftime("%Y年%m月%d日") %></div>
   <%= render "shared/chart", chart_events: @chart_events %>
 
   <!-- 操作ボタン -->
   <div class="event-btn-row">
     <%= link_to "予定を編集", edit_event_path(@event), class: "add-event-btn" %>
-    <%= button_to "予定を削除", event_path(@event), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "temp-event-btn" %>
+    <%= link_to "予定を削除", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "temp-event-btn" %>
   </div>
 
   <!-- 詳細表示ボックス -->
   <div class="event-form-box">
     <div class="event-row">
-      <span class="detail-label">タスク</span>
+      <span>タスク：</span>
       <span class="detail-value"><%= @event.title %></span>
     </div>
+
     <div class="event-row">
-      <span class="detail-label">時間</span>
-      <span class="detail-value"><%= @event.start_time.strftime("%H:%M") %> 〜 <%= @event.end_time.strftime("%H:%M") %></span>
+      <span>開始時間：</span>
+      <span class="detail-value"><%= @event.start_time.strftime("%Y-%m-%dT%H:%M") %></span>
     </div>
+
     <div class="event-row">
-      <span class="detail-label">カテゴリー</span>
-      <span class="detail-value">
-        <span class="category-badge" style="background-color:<%= @event.category.color_code %>">
-          <%= @event.category.category_name %>
-        </span>
+      <span>終了時間：</span>
+      <span class="detail-value"><%= @event.end_time.strftime("%Y-%m-%dT%H:%M") %></span>
+    </div>
+
+    <div class="event-row">
+      <span>カテゴリー：</span>
+      <span class="category-badge" style="background-color:<%= @event.category.color_code %>">
+        <%= @event.category.category_name %>
       </span>
     </div>
 
     <!-- メモ -->
-    <% if @event.memo.present? %>
-      <div class="event-memo">
-        <span class="detail-label">メモ</span>
-        <div class="detail-memo-text"><%= @event.memo %></div>
-      </div>
-    <% end %>
+    <div class="event-memo">
+      <span>メモ：</span>
+      <div class="detail-memo-text"><%= @event.memo %></div>
+    </div>
   </div>
 
+</div>
 </div>

@@ -36,10 +36,11 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @categories = current_user.categories
-    chart_date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @chart_events = current_user.events
-                                .includes(:category)
-                                .where(start_time: chart_date.beginning_of_day..chart_date.end_of_day)
+    @chart_date = params[:date] ? Date.parse(params[:date]) : nil
+    @chart_events = @chart_date ? current_user.events
+                                              .includes(:category)
+                                              .where(start_time: @chart_date.beginning_of_day..@chart_date.end_of_day)
+                                : []
   end
 
   def create
