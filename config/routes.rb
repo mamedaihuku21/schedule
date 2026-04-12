@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root "events#index", as: :authenticated_root
   end
-  root "users/sessions#new"
+  root "devise/sessions#new"
 
   resources :categories, only: [:destroy]
 
