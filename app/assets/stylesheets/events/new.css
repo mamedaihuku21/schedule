@@ -54,19 +54,6 @@
   cursor: pointer;
 }
 
-/* 仮予定ボタン */
-.temp-event-btn {
-  flex: 1;
-  padding: 12px 0;
-  text-align: center;
-  background: #eeb964;
-  border: none;
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-}
 
 /* 入力グループの箱 */
 .event-form-box {

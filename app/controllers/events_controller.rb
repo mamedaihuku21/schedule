@@ -53,8 +53,7 @@ class EventsController < ApplicationController
     else
       @event = current_user.events.build(event_params)
     end
-    @event.temporary = false
-    if @event.save
+if @event.save
       redirect_to events_path, notice: "予定を追加しました"
     else
       @categories = current_user.categories

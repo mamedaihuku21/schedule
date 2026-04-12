@@ -11,7 +11,7 @@
   <!-- 操作ボタン -->
   <div class="event-btn-row">
     <%= link_to "予定を編集", edit_event_path(@event), class: "add-event-btn" %>
-    <%= link_to "予定を削除", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "temp-event-btn" %>
+    <%= link_to "予定を削除", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "add-event-btn" %>
   </div>
 
   <!-- 詳細表示ボックス -->
